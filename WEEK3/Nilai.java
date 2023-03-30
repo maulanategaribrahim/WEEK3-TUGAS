@@ -1,90 +1,87 @@
+import java.util.Scanner;
 public class Nilai {
-    private String nama;
-    private String nim;
-    private double nilaiTugas;
-    private double nilaiUAS;
-    private double nilaiUTS;
-    private String predikat;
-    private String nilaiHuruf;
 
-    public Nilai(String nama, String nim, double nilaiTugas, double nilaiUAS, double nilaiUTS) {
-        this.nama = nama;
-        this.nim = nim;
-        this.nilaiTugas = nilaiTugas;
-        this.nilaiUAS = nilaiUAS;
-        this.nilaiUTS = nilaiUTS;
-        hitungNilai();
+    String nama , nim;
+    float nilaiUTS , nilaiTugas , nilaiUAS ;
+    float nilaiAkhir ; 
+    char  nHuruf;
+    String Predikat;
+    float naTugas; 
+    float naUTS; 
+    float naUAS;
+
+     public void inputNilai(){
+    Scanner input = new Scanner (System.in);
+    System.out.print(" Nama        = ");
+    nama = input.nextLine();
+    System.out.print(" NIM         = ");
+    nim = input.nextLine();
+    System.out.print(" Nilai Tugas = ");
+    nilaiTugas = input.nextFloat();
+    System.out.print(" Nilai UTS   = ");
+    nilaiUTS = input.nextFloat();
+    System.out.print(" Nilai UAS   = ");
+    nilaiUAS = input.nextFloat();
+
     }
 
-    public String getNama() {
-        return nama;
-    }
+    public void gethitung(){
+        naTugas = nilaiTugas * 0.2f ;
+        naUTS   = nilaiUTS * 0.35f ;
+        naUAS   = nilaiUAS * 0.45f ;
+        nilaiAkhir = naTugas + naUAS + naUTS ;
+    }    
 
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
+    public char getNilHuruf(float nilai) {
 
-    public String getNim() {
-        return nim;
-    }
-
-    public void setNim(String nim) {
-        this.nim = nim;
-    }
-
-    public double getNilaiTugas() {
-        return nilaiTugas;
-    }
-
-    public void setNilaiTugas(double nilaiTugas) {
-        this.nilaiTugas = nilaiTugas;
-        hitungNilai();
-    }
-
-    public double getNilaiUAS() {
-        return nilaiUAS;
-    }
-
-    public void setNilaiUAS(double nilaiUAS) {
-        this.nilaiUAS = nilaiUAS;
-        hitungNilai();
-    }
-
-    public double getNilaiUTS() {
-        return nilaiUTS;
-    }
-
-    public void setNilaiUTS(double nilaiUTS) {
-        this.nilaiUTS = nilaiUTS;
-        hitungNilai();
-    }
-
-    public String getPredikat() {
-        return predikat;
-    }
-
-    public String getNilaiHuruf() {
-        return nilaiHuruf;
-    }
-
-    private void hitungNilai() {
-        double nilaiAkhir = (nilaiTugas * 0.2) + (nilaiUTS * 0.35) + (nilaiUAS * 0.45);
-
-        if (nilaiAkhir >= 85) {
-            nilaiHuruf = "A";
-            predikat = "Sangat Baik";
-        } else if (nilaiAkhir >= 70 && nilaiAkhir <85) {
-            nilaiHuruf = "B";
-            predikat = "Baik";
-        } else if (nilaiAkhir >= 60 && nilaiAkhir <70) {
-            nilaiHuruf = "C";
-            predikat = "Cukup";
-        } else if (nilaiAkhir >= 40 && nilaiAkhir <60) {
-            nilaiHuruf = "D";
-            predikat = "Kurang";
+         if (nilai >= 85) {
+            nHuruf = 'A';
+        } else if (nilai >= 70 && nilai < 85) {
+            nHuruf = 'B';
+        } else if (nilai >= 60 && nilai < 70) {
+            nHuruf = 'C';
+        } else if (nilai >= 40 && nilai < 60) {
+            nHuruf = 'D';
         } else {
-            nilaiHuruf = "E";
-            predikat = "Sangat Kurang";
+            nHuruf = 'E';
         }
+        return nHuruf;
     }
+
+    public String getPredikat(char Huruf)
+    {
+        switch( Huruf )
+        {
+            case 'A' : 
+                Predikat = "Apik ";
+                    break;
+            case 'B' :
+                Predikat = "Baik";
+                    break;
+            case 'C' : 
+                Predikat = "Cukup";
+                    break;
+            case 'D' :
+                Predikat = "Dablek";
+                    break;
+            default : 
+                Predikat = "Elek ";
+        } 
+        return Predikat;
+    }
+
+
+    public void cetakNilai(){
+
+     System.out.println(" Nama        = " + nama);
+     System.out.println(" NIM         = " + nim );
+     System.out.println(" Nilai Tugas = " + nilaiTugas + "  20% : " + nilaiTugas * 0.2f);
+     System.out.println(" Nilai UTS   = " + nilaiUTS + "  30% : " + nilaiUTS * 0.35f);
+     System.out.println(" Nilai UAS   = " + nilaiUAS + "  45% : " + nilaiUAS * 0.45f);
+     gethitung();
+     System.out.println(" Nilai Akhir = " + nilaiAkhir);
+     System.out.println(" Nilai Huruf = " + getNilHuruf(nilaiAkhir));
+     System.out.println(" Predikat    = " + getPredikat(nHuruf));
+    }
+
 }
